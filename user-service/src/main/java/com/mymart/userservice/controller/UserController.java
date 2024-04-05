@@ -74,7 +74,7 @@ public class UserController {
         if(userlist.size() == 1 && userlist.get(0).getPassword().equals(user.getPassword())){
             HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", userlist.get(0));
-            return "redirect:/user/products";
+            return "redirect:/user/home";
         }
 
         model.addAttribute("user", new User());
@@ -110,7 +110,7 @@ public class UserController {
         editedUser.setPassword(newPassword);
         userRepository.save(editedUser);
 
-        return "redirect:/user/products";
+        return "redirect:/user/home";
     }
 
     @GetMapping("/home")
@@ -127,18 +127,24 @@ public class UserController {
 
 
     @GetMapping("/products")
-    public String showProducts(Model model){
+    public String showProducts(HttpServletRequest request, Model model){
         
-        String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080")
+        User currentuser = (User)request.getSession().getAttribute("loggedInUser");
+        if(currentuser == null){
+            return "redirect:/user/login";
+        }
+        else{
+            String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080")
                 .path("/products/list") // Endpoint in product-service controller
                 .toUriString();
 
-        @SuppressWarnings("unchecked")
-        List<Product> productList = (List<Product>)restTemplate.getForObject(url, List.class);
+            @SuppressWarnings("unchecked")
+            List<Product> productList = (List<Product>)restTemplate.getForObject(url, List.class);
 
-        model.addAttribute("products", productList);
+            model.addAttribute("products", productList);
 
-        return "products";
+            return "products";
+        }
     }
     
     @GetMapping("/logout")
