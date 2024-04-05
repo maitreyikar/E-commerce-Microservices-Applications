@@ -42,4 +42,9 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString(){
+        return "{" + String.valueOf(this.id) + ", " + this.name + ", " + String.valueOf(this.price) + "}";
+    }
 }

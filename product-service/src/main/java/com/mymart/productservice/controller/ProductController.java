@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.mymart.productservice.model.Product;
 import com.mymart.productservice.repository.ProductRepository;
 
-//import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/products")
@@ -26,6 +28,16 @@ public class ProductController {
         Iterable<Product> products = productRepository.findAll();
         model.addAttribute("products", products);
         return "product-list";
+    }
+
+    @GetMapping("/list")
+    public @ResponseBody List<Product> listAllProducts() {
+        
+        Iterable<Product> products = productRepository.findAll();
+        List<Product> productList = new ArrayList<>();
+        products.forEach(productList::add);
+
+        return productList;
     }
 
     @GetMapping("/add")

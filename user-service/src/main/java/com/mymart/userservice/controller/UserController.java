@@ -1,11 +1,12 @@
 package com.mymart.userservice.controller;
 
-//import com.mymart.userservice.model.Product;
+import com.mymart.userservice.model.Product;
 import com.mymart.userservice.model.User;
 import com.mymart.userservice.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
+
 
 
 @Controller
@@ -23,6 +29,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public UserController(UserRepository userRepository){
         this.userRepository = userRepository;
@@ -104,12 +113,34 @@ public class UserController {
         return "redirect:/user/products";
     }
 
-    @GetMapping("/products")
-    public String showProducts(){
-        return "products";
+    @GetMapping("/home")
+    public String showHome(HttpServletRequest request, Model model){
+        
+        User currentuser = (User)request.getSession().getAttribute("loggedInUser");
+        if(currentuser == null){
+            return "redirect:/user/login";
+        }
+        else{
+            return "home";
+        }
     }
 
 
+    @GetMapping("/products")
+    public String showProducts(Model model){
+        
+        String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080")
+                .path("/products/list") // Endpoint in product-service controller
+                .toUriString();
+
+        @SuppressWarnings("unchecked")
+        List<Product> productList = (List<Product>)restTemplate.getForObject(url, List.class);
+
+        model.addAttribute("products", productList);
+
+        return "products";
+    }
+    
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession(false);
@@ -134,6 +165,6 @@ public class UserController {
         model.addAttribute("error", "");
         return "signup";
     }
-
+    
     
 }

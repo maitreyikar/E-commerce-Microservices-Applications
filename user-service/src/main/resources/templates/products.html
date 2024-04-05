@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <body>
-        Working on it <br/>
-        <a th:href="@{/user/profile}">Profile</a><br/>
-        <a th:href="@{/user/logout}">Logout</a><br/>
-        <a th:href="@{/user/delete}">Delete Account</a><br/>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+    <h1>Product List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/user/home">Back to Home</a>
+</body>
 </html>
