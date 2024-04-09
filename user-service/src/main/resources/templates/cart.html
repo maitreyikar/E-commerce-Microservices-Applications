@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cart</title>
+    </head>
+    <body>
+        <h1>Shopping Cart</h1>
+        <h4 th:if="${cartTotal == 0}">Cart is empty, go to product menu to select items.</h4>
+        <table th:unless="${cartTotal == 0}">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="entry : ${cartItems.entrySet()}">
+                    <td th:text="${entry.key.name}"></td>
+                    <td th:text="${entry.key.brand}"></td>
+                    <td th:text="${entry.key.price}"></td>
+                    <td th:text="${entry.value}"></td>
+                    <td th:text="${entry.key.price * entry.value}"></td>
+                    <td>
+                        <form th:action="@{/user/cart/update}" method="post">
+                            <input type="hidden" name="productId" th:value="${entry.key.id}">
+                            <input type="number" name="quantity" min="1" th:value="${entry.value}">
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/user/cart/remove}" method="post">
+                            <input type="hidden" name="productId" th:value="${entry.key.id}">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"><b>Grand Total</b></td>
+                    <td th:text="${cartTotal}"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+        <form th:unless="${cartTotal == 0}" th:action="@{/user/cart/confirm}" method="post">
+            <input type = "text" name="address" maxlength="100" required>
+            <button type="submit">Place Order</button>
+        </form>
+        <br>
+        <a th:href="@{/user/products}">Products</a></br>
+        <a th:href="@{/user/cart/clear}">Clear Cart</a></br>
+        <a th:href="@{/user/home}">Back to Home</a>
+    </body>
+</html>

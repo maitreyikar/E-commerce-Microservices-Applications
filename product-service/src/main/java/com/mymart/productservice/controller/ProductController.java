@@ -40,6 +40,12 @@ public class ProductController {
         return productList;
     }
 
+    @GetMapping("/fetch/{id}")
+    public @ResponseBody Product fetchProduct(@PathVariable Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product Id: " + id));;
+        return product;
+    }
+
     @GetMapping("/add")
     public String addProductForm(Model model) {
         model.addAttribute("edit", false);
@@ -66,6 +72,8 @@ public class ProductController {
     public String editProduct(@PathVariable Long id, @ModelAttribute Product product) {
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid product Id: " + id));
+                
+        existingProduct.setBrand(product.getBrand());
         existingProduct.setName(product.getName());
         existingProduct.setPrice(product.getPrice());
         productRepository.save(existingProduct);

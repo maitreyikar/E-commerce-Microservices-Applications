@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Details</title>
+</head>
+<body>
+    <h1>Order Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="entry : ${orderDetails.entrySet()}">
+                <td th:text="${entry.key.brand}">Brand</td>
+                <td th:text="${entry.key.name}">Product Name</td>
+                <td th:text="${entry.key.price}">Price</td>
+                <td th:text="${entry.value}">Quantity</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/user/home">Back to Home</a>
+</body>
+</html>

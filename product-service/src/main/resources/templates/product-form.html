@@ -9,11 +9,13 @@
     <h1 th:unless="${edit}">Add Product</h1>
     <form th:if="${edit}" th:action="@{/products/edit/{id}(id=${product.id})}" method="post">
         <input type="hidden" th:field="${product.id}">
+        <label>Brand: <input type="text" th:field="${product.brand}"></label><br>
         <label>Name: <input type="text" th:field="${product.name}"></label><br>
         <label>Price: <input type="text" th:field="${product.price}"></label><br>
         <button type="submit">Save</button>
     </form>
     <form th:unless="${edit}" th:action="@{/products/add}" method="post">
+        <label>Brand: <input type="text" th:field="${product.brand}"></label><br>
         <label>Name: <input type="text" th:field="${product.name}"></label><br>
         <label>Price: <input type="text" th:field="${product.price}"></label><br>
         <button type="submit">Add</button>

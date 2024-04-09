@@ -1,6 +1,5 @@
 package com.mymart.productservice.repository;
 
-//import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import com.mymart.productservice.model.Product;
 

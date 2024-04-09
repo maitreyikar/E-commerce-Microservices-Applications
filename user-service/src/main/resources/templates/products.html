@@ -9,19 +9,28 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Brand</th>
                 <th>Name</th>
                 <th>Price</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="product : ${products}">
-                <td th:text="${product.id}"></td>
+                <td th:text="${product.brand}"></td>
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.price}"></td>
+                <td>
+                    <form th:action="@{/user/cart/add}" method="post">
+                        <input type="hidden" th:name="productId" th:value="${product.id}">
+                        <input type="number" id="quantity" name="quantity" min="1" value="1">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
+    <br>
+    <a href="/user/cart/view">View Cart</a><br>
     <a href="/user/home">Back to Home</a>
 </body>
 </html>

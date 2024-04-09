@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order History</title>
+</head>
+<body>
+    <h1>Order History</h1>
+    <div th:if="${not #lists.isEmpty(orders)}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Total</th>
+                    <th>Address</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}">Order ID</td>
+                    <td th:text="${order.total}">Total</td>
+                    <td th:text="${order.address}">Address</td>
+                    <td th:text="${order.date}">Date</td>
+                    <td th:text="${order.time}">Time</td>
+                    <td><a th:href="@{/user/orderhistory/{orderId}(orderId=${order.id})}">View Details</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${#lists.isEmpty(orders)}">
+        <p>No orders found.</p>
+    </div>
+    <a href="/user/home">Back to Home</a>
+</body>
+</html>
