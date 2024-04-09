@@ -3,8 +3,12 @@ The aim of this project is to develop an e-commerce microservices application th
 
 For running the services:
 	1. Open 3 terminals, one in each of the "<user/product/order>-service" directories.
+
 	2. ./mvnw spring-boot:run (or just mvnw or mvn)
-	3. product-service will be available on localhost:8080/
-	4. user-service will be available on localhost:8081/user/login
+
+	3. product-service will be available on localhost:8080/products/
+
+	4. user-service will be available on localhost:8081/user/signup
+
 	5. order-service will be available on localhost:8082 (no frontend, no point in opening in browser)
 
