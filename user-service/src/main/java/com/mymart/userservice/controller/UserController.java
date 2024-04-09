@@ -296,13 +296,10 @@ public class UserController {
                     .path("/products/fetch/" + String.valueOf(entry.getKey())) // Endpoint in product-service controller
                     .toUriString();
             
-            System.out.println("here1");
             Product product = (Product)restTemplate.getForObject(url2, Product.class);
-            System.out.println("here2");
 
             orderDetails2.put(product, entry.getValue());
         }
-        System.out.println("here3");
 
         
         model.addAttribute("orderDetails", orderDetails2);
