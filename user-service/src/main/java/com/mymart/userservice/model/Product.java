@@ -1,10 +1,10 @@
 package com.mymart.userservice.model;
 
-//import jakarta.persistence.*;
+import jakarta.persistence.*;
 
 public class Product {
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String brand;
     private String name;
