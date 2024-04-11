@@ -11,7 +11,7 @@ The aim of this project is to develop an e-commerce microservices application th
 			4. "docker network connect mymart-mysql-net mysqldb" (can close the terminal now)
 
 	2. Spring Boot Applications:
-		Running for the first time **(do it in the given order only, that is, for product, then for user, then for order, otherwise there will be errors)**:
+		Running for the first time (do it in the given order only, that is, for product, then for user, then for order, otherwise there will be errors):
 			1. In product-service/,  execute "mvn clean package"
 			2. While staying in the same directory, execute "docker build -t product-service ."
 			3. docker run -p 8080:8080 --name product-service --network=mymart-mysql-net -e MYSQL_HOST=mysqldb -e MYSQL_PASSWORD=root product-service"
