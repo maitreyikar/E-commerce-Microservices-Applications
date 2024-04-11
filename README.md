@@ -3,12 +3,9 @@ The aim of this project is to develop an e-commerce microservices application th
 
 
 ### For deploying and running in Docker containers for the very first time:
-
 	1. MySQL:
-
 		Running for the first time (initial set up, can be skipped on subsequent runs)
 			1. docker pull mysql
-			
 			2. docker run -p 3307:3306 --name mysqldb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=mymart mysql:latest
 
 			3. In a separate terminal, "docker network create mymart-mysql-net"
