@@ -29,7 +29,7 @@ The aim of this project is to develop an e-commerce microservices application th
 	4. To stop the container: docker container stop <containerID>
 
 
-## Accessing the services: 
+### Accessing the services: 
 	1. product-service will be available on localhost:8080/products/ for product-related CRUD operations
 	2. user-service will be available on localhost:8081/user/signup for user-related features
 
