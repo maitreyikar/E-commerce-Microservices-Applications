@@ -24,7 +24,6 @@ The aim of this project is to develop an e-commerce microservices application th
 ### For subsequent runs in Docker (applicable to MySQL as well as all three Spring Boot apps):
 	Note: Always start the MySQL container first.
 	1. docker container ls -a
-	<!--tsk-->
 	2. Note down the container ID of the container you want to run
 	3. docker container start <containerID_from_previous_step>
 	4. To stop the container: docker container stop <containerID>
