@@ -151,7 +151,7 @@ public class UserController {
             return "redirect:/user/login";
         }
         else{
-            String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080")
+            String url = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")
                 .path("/products/list") // Endpoint in product-service controller
                 .toUriString();
 
@@ -195,7 +195,7 @@ public class UserController {
 
         for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
             
-            String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080")
+            String url = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")
                     .path("/products/fetch/" + String.valueOf(entry.getKey())) // Endpoint in product-service controller
                     .toUriString();
             
@@ -247,7 +247,7 @@ public class UserController {
         cartDTO.setAddress(address);
         cartDTO.setUser((User)request.getSession().getAttribute("loggedInUser"));
 
-        String orderServiceUrl = "http://localhost:8082/order/confirm"; // Assuming order service endpoint
+        String orderServiceUrl = "http://order-service:8082/order/confirm"; // Assuming order service endpoint
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -268,7 +268,7 @@ public class UserController {
     @GetMapping("/orderhistory")
     public String viewOrderHistory(HttpServletRequest request, Model model) {
         Long userId = ((User)request.getSession().getAttribute("loggedInUser")).getId();
-        String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8082")
+        String url = UriComponentsBuilder.fromHttpUrl("http://order-service:8082")
                 .path("/order/history/" + String.valueOf(userId))
                 .toUriString();
 
@@ -281,7 +281,7 @@ public class UserController {
     @GetMapping("/orderhistory/{orderId}")
     public String viewOrderHistory(Model model, @PathVariable Long orderId) {
         
-        String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8082")
+        String url = UriComponentsBuilder.fromHttpUrl("http://order-service:8082")
                 .path("/order/history/" + String.valueOf(orderId) + "/items")
                 .toUriString();
 
@@ -292,7 +292,7 @@ public class UserController {
 
         for (Map.Entry<Long, Integer> entry : orderDetails.entrySet()) {
             
-            String url2 = UriComponentsBuilder.fromHttpUrl("http://localhost:8080")
+            String url2 = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")
                     .path("/products/fetch/" + String.valueOf(entry.getKey())) // Endpoint in product-service controller
                     .toUriString();
             

@@ -60,7 +60,7 @@ public class OrderController {
         double cartTotal = 0;
         for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
             
-            String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080")
+            String url = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")  //change this to localhost for local deployment
                     .path("/products/fetch/" + String.valueOf(entry.getKey())) // Endpoint in product-service controller
                     .toUriString();
             
