@@ -18,24 +18,23 @@ The aim of this project is to develop an e-commerce microservices application th
 
 ### For deploying and running in Docker containers for the very first time:
 	1. MySQL:
-		Running for the first time (initial set up, can be skipped on subsequent runs)
-			1. docker pull mysql
-			2. docker run -p 3307:3306 --name mysqldb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=mymart mysql:latest
-			3. In a separate terminal, "docker network create mymart-mysql-net"
-			4. "docker network connect mymart-mysql-net mysqldb" (can close the terminal now)
+		1. docker pull mysql
+		2. docker run -p 3307:3306 --name mysqldb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=mymart mysql:latest
+		3. In a separate terminal, "docker network create mymart-mysql-net"
+		4. "docker network connect mymart-mysql-net mysqldb" (can close the terminal now)
 
-	2. Spring Boot Applications:
-		Running for the first time (do it in the given order only, that is, for product, then for user, then for order, otherwise there will be errors):
-			1. In product-service/,  execute "mvn clean package"
-			2. While staying in the same directory, execute "docker build -t product-service ."
-			3. docker run -p 8080:8080 --name product-service --network=mymart-mysql-net -e MYSQL_HOST=mysqldb -e MYSQL_PASSWORD=root product-service"
-			4. Repeat for 
-				a.user-service (port numbers should be 8081:8081)
-				b.order-service (port numbers should be 8082:8082)
-			Execute the commands in the corresponding directories and replace "product" with "user" or "order" wherever required.
+	2. Microservices:
+		NOTE: Do it in the given order only, that is, for product service, then user service, then order service.
+		1. In product-service/,  execute "mvn clean package"
+		2. While staying in the same directory, execute "docker build -t product-service ."
+		3. docker run -p 8080:8080 --name product-service --network=mymart-mysql-net -e MYSQL_HOST=mysqldb -e MYSQL_PASSWORD=root product-service"
+		4. Repeat for 
+			a.user-service (port numbers should be 8081:8081)
+			b.order-service (port numbers should be 8082:8082)
+		Execute the commands in the corresponding directories and replace "product" with "user" or "order" wherever required.
 
 
-### For subsequent runs in Docker (applicable to MySQL as well as all three Spring Boot apps):
+### For subsequent runs in Docker (applicable to MySQL as well as all three microservices):
 	Note: Always start the MySQL container first.
 	1. docker container ls -a
 	2. Note down the container ID of the container you want to run
