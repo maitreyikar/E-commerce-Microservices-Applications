@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+      - name: product-service
+        image: pes2ug21cs270maitreyikar/product-service:version1.0
+        env:
+        - name: MYSQL_HOST
+          value: mysql
+        - name: MYSQL_PASSWORD
+          value: root
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30000
+  selector:
+    app: product-service

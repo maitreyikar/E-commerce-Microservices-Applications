@@ -1,6 +1,20 @@
-## PES2UG21CS263_270_271_272_E-commerce-Microservices-Application-using-Docker-Kubernetes-Jenkins-Git
+# PES2UG21CS263_270_271_272_E-commerce-Microservices-Application-using-Docker-Kubernetes-Jenkins-Git
 The aim of this project is to develop an e-commerce microservices application that can be deployed on the cloud using Docker, Kubernetes, Jenkins, and Git. The application will consist of several microservices that will be deployed as Docker containers on a Kubernetes cluster.
 
+
+## Using Kubernetes:
+	1. Make sure you are in the root directory (where READ.md is)
+	2. kubectl apply -f .\mysql-secret.yaml
+	3. kubectl apply -f .\mysql-storage.yaml
+	4. kubectl apply -f .\mysql-deployment.yaml
+	5. kubectl apply -f .\product-service\product-service-deployment.yaml
+	6. kubectl apply -f .\user-service\user-service-deployment.yaml
+	7. kubectl apply -f .\order-service\order-service-deployment.yaml
+	8. The product-service and user-service will be accessible on localhost:30000 and localhost:30001 respectively
+	9. To stop the deployments, kubectl delete --all deployments (there probably is a better way but I am too tired)
+
+
+## Using Docker:
 
 ### For deploying and running in Docker containers for the very first time:
 	1. MySQL:
