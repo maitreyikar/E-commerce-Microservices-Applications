@@ -37,9 +37,9 @@ The aim of this project is to develop an e-commerce microservices application th
   	3. kubectl scale --replicas=1 deployment/mysql
   	NOTE: DO NOT DELETE THE MYSQL SERVICE OR DEPLOYMENT, THAT WILL ERASE ALL DATABASES AND TABLES CREATED.
  
-### Subsequent runs (for MySQL):
+### Subsequent runs:
 	1. kubectl scale --replicas=0 deployment/mysql
- 	2. Use the same commands under "First run: Services"
+ 	2. For the services, use the same commands under "First run: Services"
  
 
 
