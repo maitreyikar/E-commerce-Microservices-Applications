@@ -2,6 +2,7 @@
 The aim of this project is to develop an e-commerce microservices application that can be deployed on the cloud using Docker, Kubernetes, Jenkins, and Git. The application will consist of several microservices that will be deployed as Docker containers on a Kubernetes cluster.
 
 
+
 ## Using Kubernetes:
 
 ### First run:
@@ -40,6 +41,7 @@ The aim of this project is to develop an e-commerce microservices application th
 	1. kubectl scale --replicas=0 deployment/mysql
  	2. Use the same commands under "First run: Services"
  
+
 
 
 ## Using Docker:
