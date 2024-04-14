@@ -61,12 +61,12 @@ pipeline {
             steps {
                 script{
                     bat 'minikube start'
-                    bat 'kubectl apply -f .\mysql-secret.yaml'
-                    bat 'kubectl apply -f .\mysql-storage.yaml'
-                    bat 'kubectl apply -f .\mysql-deployment.yaml'
-                    bat 'kubectl apply -f .\product-service\product-service-deployment.yaml'
-                    bat 'kubectl apply -f .\user-service\user-service-deployment.yaml'
-                    bat 'kubectl apply -f .\order-service\order-service-deployment.yaml'
+                    bat 'kubectl apply -f mysql-secret.yaml'
+                    bat 'kubectl apply -f mysql-storage.yaml'
+                    bat 'kubectl apply -f mysql-deployment.yaml'
+                    bat 'kubectl apply -f product-service\product-service-deployment.yaml'
+                    bat 'kubectl apply -f user-service\user-service-deployment.yaml'
+                    bat 'kubectl apply -f order-service\order-service-deployment.yaml'
                 }
             }
         } 
