@@ -64,9 +64,15 @@ pipeline {
                     bat 'kubectl apply -f mysql-secret.yaml'
                     bat 'kubectl apply -f mysql-storage.yaml'
                     bat 'kubectl apply -f mysql-deployment.yaml'
-                    bat 'kubectl apply -f product-service\product-service-deployment.yaml'
-                    bat 'kubectl apply -f user-service\user-service-deployment.yaml'
-                    bat 'kubectl apply -f order-service\order-service-deployment.yaml'
+                }
+                dir('product-service') {
+                    bat 'kubectl apply -f product-service-deployment.yaml'
+                }
+                dir('user-service') {
+                    bat 'kubectl apply -f user-service-deployment.yaml'
+                }
+                dir('order-service') {
+                    bat 'kubectl apply -f order-service-deployment.yaml'
                 }
             }
         } 
