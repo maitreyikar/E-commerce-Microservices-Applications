@@ -6,6 +6,8 @@ The aim of this project is to develop an e-commerce microservices application th
 ## Using Kubernetes:
 
 ### First run:
+
+	NOTE :Tag all 4 images and push them to docker hub.
 	1. minikube start (if an error is encountered, do minikube delete followed by minikube start)
 
   	MySQL:
