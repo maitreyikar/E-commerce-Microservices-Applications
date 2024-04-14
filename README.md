@@ -7,7 +7,7 @@ The aim of this project is to develop an e-commerce microservices application th
 
 ### First run:
 
-	NOTE :Tag all 4 images and push them to docker hub.
+	NOTE :Tag all 4 images and push them to docker hub first.
 	1. minikube start (if an error is encountered, do minikube delete followed by minikube start)
 
   	MySQL:
@@ -36,11 +36,11 @@ The aim of this project is to develop an e-commerce microservices application th
 ### Stopping the services:
 	1. kubectl delete service product-service user-service order-service
  	2. kubectl delete deployment product-service user-service order-service
-  	3. kubectl scale --replicas=1 deployment/mysql
+  	3. kubectl scale --replicas=0 deployment/mysql
   	NOTE: DO NOT DELETE THE MYSQL SERVICE OR DEPLOYMENT, THAT WILL ERASE ALL DATABASES AND TABLES CREATED.
  
 ### Subsequent runs:
-	1. kubectl scale --replicas=0 deployment/mysql
+	1. kubectl scale --replicas=1 deployment/mysql
  	2. For the services, use the same commands under "First run: Services"
  
 
