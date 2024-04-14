@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Build Jar Files') {
             steps {
@@ -34,22 +33,22 @@ pipeline {
             steps {
                 script {
                     bat 'powershell.exe docker tag mysql pes2ug21cs270maitreyikar/mysql:1.0'
-                    docker.withRegistry('https://registry.hub.docker.com','docker-registry-credentials')
+                    docker.withRegistry('https://registry.hub.docker.com','docker-registry-auth')
                     {
                         bat 'powershell.exe docker push pes2ug21cs270maitreyikar/mysql:1.0'          	
                     }
                     bat 'powershell.exe docker tag product-service pes2ug21cs270maitreyikar/product-service:version1.0'
-                    docker.withRegistry('https://registry.hub.docker.com','docker-registry-credentials')
+                    docker.withRegistry('https://registry.hub.docker.com','docker-registry-auth')
                     {
                         bat 'powershell.exe docker push pes2ug21cs270maitreyikar/product-service:version1.0'          	
                     }
                     bat 'powershell.exe docker tag user-service pes2ug21cs270maitreyikar/user-service:version1.0'
-                    docker.withRegistry('https://registry.hub.docker.com','docker-registry-credentials')
+                    docker.withRegistry('https://registry.hub.docker.com','docker-registry-auth')
                     {
                         bat 'powershell.exe docker push pes2ug21cs270maitreyikar/user-service:version1.0'          	
                     }
                     bat 'powershell.exe docker tag order-service pes2ug21cs270maitreyikar/order-service:version1.0'
-                    docker.withRegistry('https://registry.hub.docker.com','docker-registry-credentials')
+                    docker.withRegistry('https://registry.hub.docker.com','docker-registry-auth')
                     {
                         bat 'powershell.exe docker push pes2ug21cs270maitreyikar/order-service:version1.0'          	
                     }
