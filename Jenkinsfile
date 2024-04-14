@@ -75,16 +75,6 @@ pipeline {
                 }
             }
         } 
-        stage('Access services') {
-            steps {
-                script{
-                    bat 'powershell.exe sleep 80'
-                    bat 'powershell.exe minikube service product-service'
-                    bat 'powershell.exe minikube service user-service'
-                    bat 'powershell.exe minikube service order-service'
-                }
-            }
-        } 
     }
 
     post{
