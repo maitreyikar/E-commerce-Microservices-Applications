@@ -59,7 +59,6 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script{
-                    bat 'powershell.exe minikube start'
                     bat 'powershell.exe kubectl apply -f mysql-secret.yaml'
                     bat 'powershell.exe kubectl apply -f mysql-storage.yaml'
                     bat 'powershell.exe kubectl apply -f mysql-deployment.yaml'
