@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    tools { 
-        maven 'Maven 3.9.6' 
-        jdk 'jdk21' 
-    }
     
     environment {
         DOCKER_REGISTRY = 'https://registry.hub.docker.com'
