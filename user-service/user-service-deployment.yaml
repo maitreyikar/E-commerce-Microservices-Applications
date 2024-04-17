@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: pes2ug21cs270maitreyikar/user-service:version1.0
+        image: malayshikhar/user-service:1.0
         env:
         - name: MYSQL_HOST
           value: mysql
