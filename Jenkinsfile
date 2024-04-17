@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Build Jar Files') {
             steps {
-		
                 dir('product-service') {
                     bat 'powershell.exe mvn clean package'
                 }
@@ -29,6 +28,7 @@ pipeline {
                 }
             }
         }
+
         stage('Push Docker Images to Docker Hub') {
             steps {
                 script {
