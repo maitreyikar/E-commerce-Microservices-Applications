@@ -10,6 +10,10 @@ pipeline {
     stages {
         stage('Build Jar Files') {
             steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
                 dir('product-service') {
                     sh 'mvn clean package'
                 }
