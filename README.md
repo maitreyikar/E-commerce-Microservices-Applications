@@ -53,15 +53,17 @@ The aim of this project is to develop an e-commerce microservices application th
 	9. Save
 
 ### Deploying:
-	1. Open Docker Desktop
-	2. In a terminal, minikube start, wait till it successfully starts
-	3. Go to Jenkins dashboard, select the pipeline created in above section
-	4. In the menu that appears on the left side of the window, choose Build Now
-	5. Once the stage Deploy to Kubernetes is successfully completed, go back to terminal
-	6. minikube service product-service user-service --url
-	7. Two URLs (with port) will be displayed, for product-service and user-service respectively
-	8. Open product-service at the path /products/
-	9. Open user-service at the path /user/login
+	1. Edit the Jenkinsfile to tag the images using your username
+ 	2. Change the value of the "image" field in the respective deployment.yaml files of product-service, user-service and order-service
+	3. Open Docker Desktop
+	4. In a terminal, minikube start, wait till it successfully starts
+	5. Go to Jenkins dashboard, select the pipeline created in above section
+	6. In the menu that appears on the left side of the window, choose Build Now
+	7. Once the stage Deploy to Kubernetes is successfully completed, go back to terminal
+	8. minikube service product-service user-service --url
+	9. Two URLs (with port) will be displayed, for product-service and user-service respectively
+	10. Open product-service at the path /products/
+	11. Open user-service at the path /user/login
 
 
 ## Using Kubernetes:
