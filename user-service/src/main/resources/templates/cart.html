@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/cart.css}">
         <title>Cart</title>
     </head>
     <body>
@@ -49,7 +50,7 @@
         </table>
         <br/>
         <form th:unless="${cartTotal == 0}" th:action="@{/user/cart/confirm}" method="post">
-            <input type = "text" name="address" maxlength="100" required>
+            <input type = "text" name="address" maxlength="100" required placeholder="Enter delivery address">
             <button type="submit">Place Order</button>
         </form>
         <br>

@@ -1,0 +1,51 @@
+/* Resetting default styles */
+body, h1, table, th, td, a {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #333; /* Default text color */
+}
+
+/* General styles */
+body {
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #e0e0e0;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #333;
+    padding: 10px; /* Add padding for better visibility */
+    border-radius: 5px; /* Add rounded corners */
+}
+
+a:hover {
+    text-decoration: underline;
+}

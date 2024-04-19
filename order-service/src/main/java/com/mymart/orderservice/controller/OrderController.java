@@ -25,7 +25,7 @@ import java.time.LocalTime;
 import jakarta.persistence.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.beans.factory.annotation.Value;
 
 
 
@@ -44,6 +44,9 @@ public class OrderController {
     @Autowired
     private EntityManager entityManager;
 
+    @Value("${productserviceHost}") 
+    private String product_service_host;
+
     public OrderController(OrderRepository orderRepository, OrderDetailsRepository orderDetailsRepository){
         this.orderRepository = orderRepository;
         this.orderDetailsRepository = orderDetailsRepository;
@@ -60,8 +63,12 @@ public class OrderController {
         double cartTotal = 0;
         for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
             
-            String url = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")  //change this to localhost for local deployment
-                    .path("/products/fetch/" + String.valueOf(entry.getKey())) // Endpoint in product-service controller
+            // String url = UriComponentsBuilder.fromHttpUrl("http://product-service:8080") 
+            //         .path("/products/fetch/" + String.valueOf(entry.getKey())) 
+            //         .toUriString();
+
+            String url = UriComponentsBuilder.fromHttpUrl("http://" + product_service_host + ":8080")
+                    .path("/products/fetch/" + String.valueOf(entry.getKey()))
                     .toUriString();
             
             Product product = (Product)restTemplate.getForObject(url, Product.class);

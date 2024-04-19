@@ -20,6 +20,8 @@ spec:
           value: mysql
         - name: MYSQL_PASSWORD
           value: root
+        - name: PRODUCT_SERVICE_HOST
+          value: product-service
         ports:
         - containerPort: 8082
 ---

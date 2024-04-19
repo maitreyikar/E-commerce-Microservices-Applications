@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Order History</title>
+    <link rel="stylesheet" th:href="@{/order-history.css}">
 </head>
 <body>
     <h1>Order History</h1>
@@ -30,7 +31,7 @@
         </table>
     </div>
     <div th:if="${#lists.isEmpty(orders)}">
-        <p>No orders found.</p>
+        <p>No orders found.</p></div><br>
     </div>
     <a href="/user/home">Back to Home</a>
 </body>

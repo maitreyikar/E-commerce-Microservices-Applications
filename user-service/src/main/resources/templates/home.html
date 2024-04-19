@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" th:href="@{/home.css}">
+        <meta charset="UTF-8">
+        <title>Welcome to MyMart</title>
+    </head>
     <body>
-        Welcome to MyMart <br/>
+        <h2>Welcome to MyMart</h2><br/>
         <a th:href="@{/user/products}">View Products</a><br/>
         <a th:href="@{/user/cart/view}">View Cart</a><br/>
         <a th:href="@{/user/orderhistory}">View Order History</a><br/>

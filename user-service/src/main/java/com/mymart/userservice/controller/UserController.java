@@ -29,6 +29,7 @@ import org.springframework.http.HttpStatus;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Value;
 
 
 
@@ -43,6 +44,12 @@ public class UserController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Value("${orderserviceHost}") 
+    private String order_service_host;
+
+    @Value("${productserviceHost}") 
+    private String product_service_host;
 
     public UserController(UserRepository userRepository){
         this.userRepository = userRepository;
@@ -151,7 +158,11 @@ public class UserController {
             return "redirect:/user/login";
         }
         else{
-            String url = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")
+            // String url = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")
+            //     .path("/products/list") // Endpoint in product-service controller
+            //     .toUriString();
+
+            String url = UriComponentsBuilder.fromHttpUrl("http://" + product_service_host + ":8080")
                 .path("/products/list") // Endpoint in product-service controller
                 .toUriString();
 
@@ -195,7 +206,11 @@ public class UserController {
 
         for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
             
-            String url = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")
+            // String url = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")
+            //         .path("/products/fetch/" + String.valueOf(entry.getKey())) // Endpoint in product-service controller
+            //         .toUriString();
+
+            String url = UriComponentsBuilder.fromHttpUrl("http://" + product_service_host + ":8080")
                     .path("/products/fetch/" + String.valueOf(entry.getKey())) // Endpoint in product-service controller
                     .toUriString();
             
@@ -247,7 +262,9 @@ public class UserController {
         cartDTO.setAddress(address);
         cartDTO.setUser((User)request.getSession().getAttribute("loggedInUser"));
 
-        String orderServiceUrl = "http://order-service:8082/order/confirm"; // Assuming order service endpoint
+        //String orderServiceUrl = "http://order-service:8082/order/confirm"; // Assuming order service endpoint
+        String orderServiceUrl = "http://" + order_service_host + ":8082/order/confirm";
+        
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -268,7 +285,11 @@ public class UserController {
     @GetMapping("/orderhistory")
     public String viewOrderHistory(HttpServletRequest request, Model model) {
         Long userId = ((User)request.getSession().getAttribute("loggedInUser")).getId();
-        String url = UriComponentsBuilder.fromHttpUrl("http://order-service:8082")
+        // String url = UriComponentsBuilder.fromHttpUrl("http://order-service:8082")
+        //         .path("/order/history/" + String.valueOf(userId))
+        //         .toUriString();
+
+        String url = UriComponentsBuilder.fromHttpUrl("http://" + order_service_host + ":8082")
                 .path("/order/history/" + String.valueOf(userId))
                 .toUriString();
 
@@ -281,7 +302,11 @@ public class UserController {
     @GetMapping("/orderhistory/{orderId}")
     public String viewOrderHistory(Model model, @PathVariable Long orderId) {
         
-        String url = UriComponentsBuilder.fromHttpUrl("http://order-service:8082")
+        // String url = UriComponentsBuilder.fromHttpUrl("http://order-service:8082")
+        //         .path("/order/history/" + String.valueOf(orderId) + "/items")
+        //         .toUriString();
+
+        String url = UriComponentsBuilder.fromHttpUrl("http://" + order_service_host + ":8082")
                 .path("/order/history/" + String.valueOf(orderId) + "/items")
                 .toUriString();
 
@@ -292,7 +317,11 @@ public class UserController {
 
         for (Map.Entry<Long, Integer> entry : orderDetails.entrySet()) {
             
-            String url2 = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")
+            // String url2 = UriComponentsBuilder.fromHttpUrl("http://product-service:8080")
+            //         .path("/products/fetch/" + String.valueOf(entry.getKey())) // Endpoint in product-service controller
+            //         .toUriString();
+
+            String url2 = UriComponentsBuilder.fromHttpUrl("http://" + product_service_host + ":8080")
                     .path("/products/fetch/" + String.valueOf(entry.getKey())) // Endpoint in product-service controller
                     .toUriString();
             
@@ -316,21 +345,21 @@ public class UserController {
         return "redirect:/user/login";
     }
 
-    @GetMapping("/delete")
-    public String deleteUser(HttpServletRequest request, Model model) {
+    // @GetMapping("/delete")
+    // public String deleteUser(HttpServletRequest request, Model model) {
 
-        User currentuser = (User)request.getSession().getAttribute("loggedInUser");
-        userRepository.deleteById(currentuser.getId());
+    //     User currentuser = (User)request.getSession().getAttribute("loggedInUser");
+    //     userRepository.deleteById(currentuser.getId());
 
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
+    //     HttpSession session = request.getSession(false);
+    //     if (session != null) {
+    //         session.invalidate();
+    //     }
 
-        model.addAttribute("user", new User());
-        model.addAttribute("error", "");
-        return "signup";
-    }
+    //     model.addAttribute("user", new User());
+    //     model.addAttribute("error", "");
+    //     return "signup";
+    // }
     
     
 }

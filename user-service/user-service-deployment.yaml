@@ -20,6 +20,10 @@ spec:
           value: mysql
         - name: MYSQL_PASSWORD
           value: root
+        - name: PRODUCT_SERVICE_HOST
+          value: product-service
+        - name: ORDER_SERVICE_HOST
+          value: order-service
         ports:
         - containerPort: 8081
 ---

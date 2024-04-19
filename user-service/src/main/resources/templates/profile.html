@@ -2,12 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/profile.css}">
     <title>User Profile</title>
 </head>
 <body>
     <h2>User Profile</h2>
-    <p th:text="${error}"></p>
-    <p th:text="${user.username}"></p>
+    <p th:text="${error}"></p><br>
+    <!-- <p th:text="${user.username}"></p> -->
     <form id="myForm" th:action="@{/user/profile}" th:object="${user}" method="POST">
         <input th:field="*{password}" id="password" type="password" name="newPassword" placeholder="New Password" required><br>
         <input id="confirmPassword" type="password" name="confirmNewPassword" placeholder="Confirm New Password" required><br>

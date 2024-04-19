@@ -2,11 +2,12 @@
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/login.css}">
     <title>Login</title>
 </head>
 <body>
     <h2>Login</h2>
-    <p th:text="${error}"></p>
+    <p th:text="${error}"></p><br/>
     <form th:action="@{/user/login}" th:object="${user}" method="post">
         <input type="text" th:field="*{username}" placeholder="Username" required><br>
         <input type="password" th:field="*{password}" placeholder="Password" required><br>
