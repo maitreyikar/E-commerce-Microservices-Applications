@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: order-service
-        image: pes2ug21cs270maitreyikar/order-service:version1.0
+        image: pes2ug21cs270maitreyikar/order-service:1.0
         env:
         - name: MYSQL_HOST
           value: mysql

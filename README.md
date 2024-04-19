@@ -72,6 +72,8 @@ The aim of this project is to develop an e-commerce microservices application th
 		docker tag <image-id> <docker-username>/<imagename>:<tag>
 		docker push <docker-username>/<imagename>:<tag>
 
+		Also, change the value of the "image" field in the respective deployment.yaml files of product-service, user-service and order-service
+
 	1. minikube start (if an error is encountered, do minikube delete followed by minikube start)
 
   	MySQL:
