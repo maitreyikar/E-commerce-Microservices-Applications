@@ -35,7 +35,7 @@ pipeline {
                     bat 'powershell.exe docker tag product-service pes2ug21cs263nikitamabel/product-service:version1.0'
                     docker.withRegistry('https://registry.hub.docker.com','docker-registry-auth')
                     {
-                        bat 'powershell.exe docker push pes2ug21cs270maitreyikar/product-service:version1.0'          	
+                        bat 'powershell.exe docker push pes2ug21cs263nikitamabel/product-service:version1.0'          	
                     }
                     bat 'powershell.exe docker tag user-service pes2ug21cs263nikitamabel/user-service:version1.0'
                     docker.withRegistry('https://registry.hub.docker.com','docker-registry-auth')
