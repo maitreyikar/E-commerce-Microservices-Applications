@@ -1,6 +1,15 @@
 pipeline {
     agent any
     stages {
+        stage('Deploy MySQL to Kubernetes') {
+            steps {
+                script{
+                    bat 'powershell.exe kubectl apply -f mysql-secret.yaml'
+                    bat 'powershell.exe kubectl apply -f mysql-storage.yaml'
+                    bat 'powershell.exe kubectl apply -f mysql-deployment.yaml'
+                }
+            }
+        }
         stage('Build Jar Files') {
             steps {
                 dir('product-service') {
@@ -51,13 +60,8 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Deploy Services to Kubernetes') {
             steps {
-                script{
-                    bat 'powershell.exe kubectl apply -f mysql-secret.yaml'
-                    bat 'powershell.exe kubectl apply -f mysql-storage.yaml'
-                    bat 'powershell.exe kubectl apply -f mysql-deployment.yaml'
-                }
                 dir('product-service') {
                     bat 'powershell.exe kubectl apply -f product-service-deployment.yaml'
                 }
