@@ -51,7 +51,7 @@ pipeline {
                     {
                         bat 'powershell.exe docker push nikitamabel/user-service:version1.0'          	
                     }
-                    bat 'powershell.exe docker tag order-service nikitamabelr/order-service:version1.0'
+                    bat 'powershell.exe docker tag order-service nikitamabel/order-service:version1.0'
                     docker.withRegistry('https://registry.hub.docker.com','docker-registry-auth')
                     {
                         bat 'powershell.exe docker push nikitamabel/order-service:version1.0'          	
