@@ -12,6 +12,31 @@
         <a th:href="@{/user/orderhistory}">View Order History</a><br/>
         <a th:href="@{/user/profile}">Profile</a><br/>
         <a th:href="@{/user/logout}">Logout</a><br/>
+        <form id="loggedInUserForm" method="post">
+            <input type="hidden" id="loggedInUserName" name="loggedInUserName" th:value="${loggedInUser.name}" />
+        </form>
+        <!-- <input type="hidden" id="loggedInUserId" th:name="loggedInUserId" th:value="${loggedInUser.name}" /> -->
         <!-- <a th:href="@{/user/delete}">Delete Account</a><br/> -->
+
+        <script>
+            // Get all links
+            const links = document.querySelectorAll('a');
+            
+            // Add click event listener to each link
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default link behavior
+                    
+                    // Get the data-url attribute of the clicked link
+                    const url = this.getAttribute('data-url');
+                    
+                    // Set form action to the clicked link's URL
+                    document.getElementById('loggedInUserForm').action = url;
+                    
+                    // Submit the form
+                    document.getElementById('loggedInUserForm').submit();
+                });
+            });
+        </script>
     </body>
 </html>

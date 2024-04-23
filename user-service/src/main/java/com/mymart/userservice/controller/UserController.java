@@ -31,7 +31,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 
-
+import com.mymart.userservice.controller.*;
+import com.mymart.productservice.controller.*;
 
 
 
@@ -145,16 +146,17 @@ public class UserController {
             return "redirect:/user/login";
         }
         else{
+            model.addAttribute("loggedInUser", currentuser);
             return "home";
         }
     }
 
 
     @GetMapping("/products")
-    public String showProducts(HttpServletRequest request, Model model){
+    public String showProducts(HttpServletRequest request, Model model, @RequestParam("loggedInUserName") String userName){
         
-        User currentuser = (User)request.getSession().getAttribute("loggedInUser");
-        if(currentuser == null){
+        // currentuser = (User)request.getSession().getAttribute("loggedInUser");
+        if(userName == null){
             return "redirect:/user/login";
         }
         else{
@@ -170,30 +172,49 @@ public class UserController {
             List<Product> productList = (List<Product>)restTemplate.getForObject(url, List.class);
 
             model.addAttribute("products", productList);
+            model.addAttribute("loggedInUser", userName);
 
             return "products";
         }
     }
 
     @PostMapping("/cart/add")
-    public String addToCart(@RequestParam("productId") Long productId, @RequestParam("quantity") Integer quantity, HttpServletRequest request){
+    public String addToCart(@RequestParam("loggedInUserName") String userName, @RequestParam("userId") Long userId, @RequestParam("productId") Long productId, @RequestParam("quantity") Integer quantity, HttpServletRequest request){
 
-        @SuppressWarnings("unchecked")
-        Map<Long, Integer> cart = (Map<Long, Integer>)request.getSession().getAttribute("cart");
+        // Retrieve User and Product objects based on their IDs
+        User user = userRepository.findById(userId).orElse(null);
+        Product product = productRepository.findById(productId).orElse(null);
 
-        if (cart.containsKey(productId)) {
-            cart.put(productId, cart.get(productId) + quantity);
-        } else {
-            cart.put(productId, quantity);
-        }       
-        request.getSession().setAttribute("cart", cart);
+        // Create a new CartItem object
+        CartItem cartItem = new CartItem();
+        cartItem.setUserId(user);
+        cartItem.setProductId(product);
+        cartItem.setQuantity(quantity);
 
-        // for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
-        //     System.out.println(entry.getKey() + ": " + entry.getValue());
-        // }
-        // System.out.println("");
+        // Save the CartItem to the repository
+        cartItemRepository.save(cartItem);
 
+
+        // Redirect to the product list page
         return "redirect:/user/products";
+        // @SuppressWarnings("unchecked")
+        // Map<Long, Integer> cart = (Map<Long, Integer>)request.getSession().getAttribute("cart");
+
+        // if (cart.containsKey(productId)) {
+        //     cart.put(productId, cart.get(productId) + quantity);
+        // } else {
+        //     cart.put(productId, quantity);
+        // }       
+        // request.getSession().setAttribute("cart", cart);
+
+        // // for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
+        // //     System.out.println(entry.getKey() + ": " + entry.getValue());
+        // // }
+        // // System.out.println("");
+
+        // return "redirect:/user/products";
+
+        
     }
 
     @GetMapping("/cart/view")
