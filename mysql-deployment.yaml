@@ -14,7 +14,7 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: pes2ug21cs270maitreyikar/mysql:1.0
+      - image: nikitamabel/mysql:1.0
         name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
