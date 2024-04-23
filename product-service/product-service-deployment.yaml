@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: product-service
-        image: nikitamabel/product-service:1.0
+        image: nikitamabel/product-service:version1.0
         env:
         - name: MYSQL_HOST
           value: mysql
